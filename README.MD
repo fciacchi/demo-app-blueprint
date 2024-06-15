@@ -1,15 +1,16 @@
+![PHP 8.2](https://img.shields.io/badge/PHP-8.2-blue)
+![NODE 18.20](https://img.shields.io/badge/NODE-18.20-blue)
+![npm 10.5](https://img.shields.io/badge/npm-10.5-blue)
+[![Leaf PHP](https://img.shields.io/badge/Leaf-PHP-green)](https://leafphp.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange)](https://opensource.org/licenses/MIT)
+
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
 
 ## App Info
 
-## Installation
+For this see the [Documentation](./DOCUMENTATION.md)
 
-### Set-up
+## Installation
 
 ```shell
 # INSTALL COMPOSER
@@ -18,18 +19,20 @@ $ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 $ php -r "unlink('composer-setup.php');"
 $ composer update
 # INSTALL NPM
-$ sudo apt-get install build-essential
 $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 $ nvm install 18
 $ npm update
-# SET UP DATABASE
+# SET-UP DATABASE
 $ sudo apt install sqlite3 php8.2-sqlite3
 $ composer global require leafs/cli
 $ touch database/database.sqlite
 $ php leaf db:migrate
+$ php leaf db:seed
+# SET-UP DEFAULT ENV
+$ cp .env.example .env
 ```
 
-### DEV Environment
+## DEV Environment
 
 Requirements:
 * PHP Version: 8.2.18
@@ -43,17 +46,12 @@ $ npm i
 $ npm run dev
 ```
 
-Database Local Debug
+Open: http://localhost:5500
+
+### Database Local Debug
 
 ```shell
 npx drizzle-kit studio
 ```
 
 Open: https://local.drizzle.studio
-
-## System dependencies
-
-## Configuration
-
-## Deployment instructions
-
