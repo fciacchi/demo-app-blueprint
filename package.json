@@ -9,9 +9,10 @@
     "type": "module",
     "scripts": {
         "dev": "run-p app:serve serve",
-        "serve": "vite serve",
         "build": "vite build && npm run db:migrate",
         "watch": "vite build --watch",
+        "serve": "vite serve",
+        "start": "npm run serve",
         "app:serve": "php leaf serve",
         "db:migrate": "php leaf db:migrate"
     },
