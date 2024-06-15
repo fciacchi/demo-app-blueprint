@@ -2,6 +2,7 @@
 .env.backup
 .env.production
 build
+database/database.sqlite
 dist
 compiled
 .idea

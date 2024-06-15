@@ -27,7 +27,7 @@
         "leafs/logger": "*",
         "leafs/cors": "*",
         "leafs/auth": "*",
-        "leafs/db": "*",
+        "leafs/db": "^2.1",
         "leafs/vite": "^0.1.0",
         "leafs/inertia": "^0.1.0"
     },

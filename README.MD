@@ -14,13 +14,19 @@ Things you may want to cover:
 ```shell
 # INSTALL COMPOSER
 $ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-$ php composer-setup.php
+$ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 $ php -r "unlink('composer-setup.php');"
-$ php composer.phar update
+$ composer update
 # INSTALL NPM
+$ sudo apt-get install build-essential
 $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 $ nvm install 18
 $ npm update
+# SET UP DATABASE
+$ sudo apt install sqlite3 php8.2-sqlite3
+$ composer global require leafs/cli
+$ touch database/database.sqlite
+$ php leaf db:migrate
 ```
 
 ### DEV Environment
@@ -31,17 +37,23 @@ Requirements:
 * NPM Version: 10.5.0
 
 ```shell
-$ php composer.phar install
+$ composer install
+$ php leaf db:migrate
 $ npm i
 $ npm run dev
 ```
+
+Database Local Debug
+
+```shell
+npx drizzle-kit studio
+```
+
+Open: https://local.drizzle.studio
 
 ## System dependencies
 
 ## Configuration
 
-## Database creation
-
-## Database initialization
-
 ## Deployment instructions
+

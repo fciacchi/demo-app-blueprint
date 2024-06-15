@@ -8,15 +8,19 @@
     },
     "type": "module",
     "scripts": {
-        "dev": "run-p app-serve serve",
+        "dev": "run-p app:serve serve",
         "serve": "vite serve",
-        "build": "vite build",
+        "build": "vite build && npm run db:migrate",
         "watch": "vite build --watch",
-        "app-serve": "php leaf serve"
+        "app:serve": "php leaf serve",
+        "db:migrate": "php leaf db:migrate"
     },
     "dependencies": {
         "@inertiajs/react": "^1.1.0",
         "@vitejs/plugin-react": "^4.3.0",
+        "better-sqlite3": "^11.0.0",
+        "drizzle-kit": "^0.22.7",
+        "drizzle-orm": "^0.31.2",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
