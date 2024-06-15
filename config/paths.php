@@ -13,54 +13,30 @@
 
 return [
     'assets' => 'public/assets',
-
+    'build' => 'public/build',
     'commands' => 'app/console',
-
     'config' => 'config',
-
     'channels' => 'app/channels',
-
     'components' => 'app/components',
-
     'controllers' => 'app/controllers',
-
     'databaseStorage' => 'storage/app/db',
-
     'events' => 'app/events',
-
     'factories' => 'app/database/factories',
-
     'helpers' => 'app/helpers',
-
     'jobs' => 'app/jobs',
-
     'lib' => 'lib',
-
     'mail' => 'app/mail',
-
     'middleware' => 'app/middleware',
-
     'migrations' => 'app/database/migrations',
-
     'models' => 'app/models',
-
     'public' => 'public',
-
     'routes' => 'app/routes',
-
     'schema' => 'app/database/schema',
-
     'scripts' => 'app/scripts',
-
     'seeds' => 'app/database/seeds',
-
     'services' => 'app/services',
-
     'storage' => 'storage',
-
     'utils' => 'app/utils',
-
     'views' => 'app/views',
-
     'workers' => 'app/workers',
 ];
