@@ -12,7 +12,6 @@
         "build": "vite build && npm run db:migrate",
         "watch": "vite build --watch",
         "serve": "vite serve",
-        "start": "run-p app:serve serve",
         "app:serve": "php leaf serve",
         "db:migrate": "php leaf db:migrate"
     },
