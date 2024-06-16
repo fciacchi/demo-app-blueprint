@@ -14,6 +14,7 @@ class CreatePasswordResets extends Database
     {
         if (!static::$capsule::schema()->hasTable('password_resets')) :
             static::$capsule::schema()->create('password_resets', function (Blueprint $table) {
+                $table->id();
                 $table->string('email')->index();
                 $table->string('token');
                 $table->timestamp('created_at')->nullable();

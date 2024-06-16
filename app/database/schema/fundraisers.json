@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "employees_id:unsignedBigInteger": 123,
+    "name:string": "Fundraiser A",
+    "website?:string": "www.domain.com",
+    "description?:string": "Random description for Fundraiser",
+    "goal_amount?:integer": "10000",
+    "goal_currency?:string": "EUR",
+    "goal_end_date?:timestamp": "2021-07-23T16:18:35.947712157Z",
+    "timestamps": ""
+  }

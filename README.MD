@@ -41,7 +41,7 @@ Requirements:
 
 ```shell
 $ composer install
-$ php leaf db:reset
+$ php leaf db:migrate
 $ npm i
 $ npm run dev
 ```
