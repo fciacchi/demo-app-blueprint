@@ -5,10 +5,11 @@ The following project is a demo application that has:
 * Donation page
 * Admin backoffice
 
-The idea is to build the following application using [Leaf PHP Framework](https://leafphp.dev/).
-This Framework has been chosen over Laravel, because I already have working 
-knowledge with it and due to the tight timeline of development, it's a better 
-choice. However **Leaf PHP** is very similar to Laravel, having both Inertia 
+The idea is to build the following application using 
+[Leaf PHP Framework](https://leafphp.dev/). This Framework has been chosen 
+over Laravel, because I already have working knowledge with it and due to 
+the tight timeline of development, it's a better choice. However 
+**Leaf PHP** is very similar to Laravel, having both Inertia 
 and Vite for working with JSX pages and Eloquent ORM for the database.
 
 A Live version of the App is accessible at: https://demo.asplanned.app
@@ -19,7 +20,7 @@ For the purpose of the test, it is being left out:
 * User authentication
 * Mailing system
 * Content pages (terms, privacy, etc)
-* Design is also based upon template [XXXX]()
+* Design is based upon template [XXXX]()
 
 ## Database Structure
 

@@ -1,5 +1,5 @@
 ![PHP 8.2](https://img.shields.io/badge/PHP-8.2-blue)
-![NODE 18.20](https://img.shields.io/badge/NODE-18.20-blue)
+![Node 18.20](https://img.shields.io/badge/Node-18.20-blue)
 ![npm 10.5](https://img.shields.io/badge/npm-10.5-blue)
 [![Leaf PHP](https://img.shields.io/badge/Leaf-PHP-green)](https://leafphp.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange)](https://opensource.org/licenses/MIT)
@@ -37,7 +37,7 @@ $ cp .env.example .env
 Requirements:
 * PHP Version: 8.2.18
 * Node Version: 18.20.2
-* NPM Version: 10.5.0
+* npm Version: 10.5.0
 
 ```shell
 $ composer install
@@ -55,3 +55,11 @@ npx drizzle-kit studio
 ```
 
 Open: https://local.drizzle.studio
+
+## Plugins
+
+<a href="./assets/postman/chrome-app/postman_extension_5_5_6_0.crx"><img src="./assets/images/plugin-postman.png" width="60" alt="Postman"></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters"><img src="https://ryanluker.gallerycdn.vsassets.io/extensions/ryanluker/vscode-coverage-gutters/2.11.1/1699832082510/Microsoft.VisualStudio.Services.Icons.Default" width="60" alt="Coverage Gutters"></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client"><img src="https://bmewburn.gallerycdn.vsassets.io/extensions/bmewburn/vscode-intelephense-client/1.10.4/1711417500317/Microsoft.VisualStudio.Services.Icons.Default" width="60" alt="PHP Intelephense"></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer"><img src="https://qwtel.gallerycdn.vsassets.io/extensions/qwtel/sqlite-viewer/0.6.0/1717998730126/Microsoft.VisualStudio.Services.Icons.Default" width="60" alt="SQLite Viewer"></a>
+<a href="https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-mysql-client2"><img src="https://cweijan.gallerycdn.vsassets.io/extensions/cweijan/vscode-mysql-client2/7.4.9/1718354428567/Microsoft.VisualStudio.Services.Icons.Default" width="60" alt="MySQL"></a>
