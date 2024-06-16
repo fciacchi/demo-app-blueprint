@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "username:string": "username",
+  "email:string": "me@domain.com",
+  "first_name?:string": "John",
+  "last_name?:string": "Smith",
+  "role?:string": "Software Developer",
+  "department?:string": "IT",
+  "timestamps": ""
+}

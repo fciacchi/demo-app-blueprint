@@ -88,4 +88,5 @@ return [
             'prefix_indexes' => true,
         ],
     ],
+    'migrations' => 'migrations',
 ];

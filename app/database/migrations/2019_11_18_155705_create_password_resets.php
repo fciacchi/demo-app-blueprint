@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Database\Migration;
 use Leaf\Database;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -18,6 +19,8 @@ class CreatePasswordResets extends Database
                 $table->timestamp('created_at')->nullable();
             });
         endif;
+
+        (new Migration('2019_11_18_155705_create_password_resets'))->insert();
     }
 
     /**
@@ -26,6 +29,8 @@ class CreatePasswordResets extends Database
      */
     public function down()
     {
+        (new Migration('2019_11_18_155705_create_password_resets'))->delete();
+
         static::$capsule::schema()->dropIfExists('password_resets');
     }
 }

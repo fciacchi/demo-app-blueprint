@@ -53,6 +53,7 @@
             "App\\Console\\": "app/console/",
             "App\\Scripts\\": "app/scripts/",
             "App\\Helpers\\": "app/helpers/",
+            "App\\Helpers\\Database\\": "app/helpers/database",
             "App\\Channels\\": "app/channels/",
             "App\\Services\\": "app/services/",
             "App\\Middleware\\": "app/middleware/",
@@ -61,7 +62,8 @@
             "App\\Notifications\\": "app/notifications/",
             "App\\Database\\Seeds\\": "app/database/seeds/",
             "App\\Database\\Schema\\": "app/database/schema/",
-            "App\\Database\\Factories\\": "app/database/factories/"
+            "App\\Database\\Factories\\": "app/database/factories/",
+            "App\\Database\\Migrations\\": "app/database/migrations/"
         }
     },
     "config": {
