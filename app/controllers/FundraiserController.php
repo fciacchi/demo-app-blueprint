@@ -65,7 +65,7 @@ class FundraiserController extends Controller
             return (new Response())->json(['error' => 'Validation errors'], 406);
         }
 
-        if (!isset($data['employee_id']) || !isset($data['name'])) {
+        if (!isset($data['name'])) {
             return (new Response())->json(['error' => 'Missing required fields'], 422);
         }
 
@@ -75,7 +75,7 @@ class FundraiserController extends Controller
         }
 
         try {
-            unset($data['id'], $data['created_at'], $data['updated_at']);
+            unset($data['id'], $data['employee_id'], $data['created_at'], $data['updated_at']);
             $data['updated_at'] = date('Y-m-d H:i:s');
 
             $fundraiser->update($data);
@@ -88,7 +88,7 @@ class FundraiserController extends Controller
     /**
      * Get all fundraisers, paginated.
      */
-    public function index($page)
+    public function index($page, $expand = false)
     {
         $limit = 10;
         $offset = ($page - 1) * $limit;
@@ -99,7 +99,8 @@ class FundraiserController extends Controller
             return (new Response())->json(
                 [
                     'fundraisers' => [],
-                    'pages' => [
+                    '_collections' => [],
+                    '_pages' => [
                         'current' => $page,
                         'total' => $totalPages
                     ]
@@ -111,14 +112,32 @@ class FundraiserController extends Controller
         $fundraisers = Fundraiser::orderBy('created_at', 'desc')
             ->skip($offset)->take($limit)->get();
 
-            return (new Response())->json(
-                [
+        $allCollections = [];
+        $employeeCollection = [];
+
+        if ($expand) {
+            foreach ($fundraisers as $fundraiser) {
+                if (isset($fundraiser['employee_id'])) {
+                    $employeeId = $fundraiser['employee_id'];
+                    $employee = Employee::find($employeeId);
+                    $employeeCollection[$employeeId] = $employee;
+                }
+            }
+
+            $allCollections = [
+                'employees' => $employeeCollection,
+            ];
+        }
+
+        return (new Response())->json(
+            [
                 'fundraisers' => $fundraisers,
-                'pages' => [
-                    'current' => $page,
+                '_collections' => $allCollections,
+                '_pages' => [
+                    'current' => intval($page),
                     'total' => $totalPages
                 ]
-                ]
-            );
+            ]
+        );
     }
 }

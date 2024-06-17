@@ -68,7 +68,6 @@ PHP and JS code. Specifically:
 - Add Postman collection for API test (locally) 
 - Main Template for JSX
 - Add PHPUnit tests
-- Add Github Workflow
 
 ## TODO
 
@@ -76,4 +75,4 @@ PHP and JS code. Specifically:
 * Add a payment system (can be used [Cashier](https://laravel.com/docs/11.x/billing) from Laravel)
 * Add JEST Combined Test Coverage
 * Additional security with JWT Tokens and Signed payload
-* Add Postman test to Github workflow
+* Add to Github workflow (Linters + Tests + Postman)

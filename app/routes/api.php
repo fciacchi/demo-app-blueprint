@@ -38,9 +38,10 @@ app()->get(
 );
 
 app()->get('/api/fundraisers/', static function (): void {
+    $expand = $_GET['expand'] ?? false;
     $page = $_GET['page'] ?? 1;
     $controller = new FundraiserController();
-    $controller->index($page);
+    $controller->index($page, $expand);
 });
 
 app()->post('/api/fundraisers/', static function (): void {
