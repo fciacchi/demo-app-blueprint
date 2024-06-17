@@ -7,6 +7,7 @@ class DeletePreviousTables extends Database
 {
     /**
      * Run the migrations.
+     *
      * @return void
      */
     public function up()
@@ -19,6 +20,7 @@ class DeletePreviousTables extends Database
 
     /**
      * Reverse the migrations.
+     *
      * @return void
      */
     public function down()

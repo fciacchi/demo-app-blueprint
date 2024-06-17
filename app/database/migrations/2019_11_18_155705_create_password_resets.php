@@ -8,17 +8,20 @@ class CreatePasswordResets extends Database
 {
     /**
      * Run the migrations.
+     *
      * @return void
      */
     public function up()
     {
         if (!static::$capsule::schema()->hasTable('password_resets')) :
-            static::$capsule::schema()->create('password_resets', function (Blueprint $table) {
-                $table->id();
-                $table->string('email')->index();
-                $table->string('token');
-                $table->timestamp('created_at')->nullable();
-            });
+            static::$capsule::schema()->create(
+                'password_resets', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('email')->index();
+                    $table->string('token');
+                    $table->timestamp('created_at')->nullable();
+                }
+            );
         endif;
 
         (new Migration('2019_11_18_155705_create_password_resets'))->insert();
@@ -26,6 +29,7 @@ class CreatePasswordResets extends Database
 
     /**
      * Reverse the migrations.
+     *
      * @return void
      */
     public function down()

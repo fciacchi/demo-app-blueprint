@@ -8,6 +8,7 @@ class CreateUsers extends Database
 {
     /**
      * Run the migrations.
+     *
      * @return void
      */
     public function up()
@@ -19,6 +20,7 @@ class CreateUsers extends Database
 
     /**
      * Reverse the migrations.
+     *
      * @return void
      */
     public function down()

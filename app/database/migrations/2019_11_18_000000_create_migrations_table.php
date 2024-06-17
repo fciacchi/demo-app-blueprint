@@ -15,10 +15,12 @@ class CreateMigrationsTable extends Database
     {
         if (!static::$capsule::schema()->hasTable('migrations')) {
             // Create the migrations table
-            static::$capsule::schema()->create('migrations', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('migration')->unique();
-            });
+            static::$capsule::schema()->create(
+                'migrations', function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->string('migration')->unique();
+                }
+            );
 
             (new Migration('2019_11_18_000000_create_migrations_table'))->insert();
         }

@@ -6,6 +6,7 @@ class Fundraiser extends Model
 {
     /**
      * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -14,12 +15,14 @@ class Fundraiser extends Model
 
     /**
      * Indicates if the model should be timestamped.
+     *
      * @var bool
      */
     public $timestamps = true;
 
     /**
      * The attributes that should be cast to native types.
+     *
      * @var array
      */
     protected $casts = [

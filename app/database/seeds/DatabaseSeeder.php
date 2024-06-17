@@ -8,6 +8,7 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed your application's database.
+     *
      * @return void
      */
     public function run(): array

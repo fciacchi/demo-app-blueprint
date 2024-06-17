@@ -5,7 +5,8 @@ use Leaf\Schema;
 use Leaf\Database;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateDonationsTable extends Database {
+class CreateDonationsTable extends Database
+{
     /**
      * Run the migrations.
      *
@@ -16,11 +17,13 @@ class CreateDonationsTable extends Database {
         if (!static::$capsule::schema()->hasTable('donations')) {
             Schema::build("donations");
 
-            static::$capsule::schema()->table('donations', function (Blueprint $table) {
-                $table->foreign('employee_id')->references('id')->on('employees');
-                $table->foreign('mission_id')->references('id')->on('missions');
-                $table->foreign('payment_method_id')->references('id')->on('payment_methods');
-            });
+            static::$capsule::schema()->table(
+                'donations', function (Blueprint $table) {
+                    $table->foreign('employee_id')->references('id')->on('employees');
+                    $table->foreign('mission_id')->references('id')->on('missions');
+                    $table->foreign('payment_method_id')->references('id')->on('payment_methods');
+                }
+            );
         }
 
         (new Migration('2024_06_17_000006_create_donations_table'))->insert();

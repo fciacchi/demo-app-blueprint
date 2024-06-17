@@ -5,7 +5,8 @@ namespace App\Helpers\Database;
 use Leaf\Database;
 use Illuminate\Database\Schema\Blueprint;
 
-class Migration {
+class Migration
+{
     private $database = null;
     private $tableName = 'migrations';
     private $fileName = '';
@@ -23,9 +24,11 @@ class Migration {
         ) {
 
             $this->database::$capsule::table($this->tableName)
-                ->insert([
+                ->insert(
+                    [
                     'migration' => $this->fileName,
-                ]);
+                    ]
+                );
         }
     }
 
@@ -52,13 +55,15 @@ class Migration {
                     "SELECT CONSTRAINT_NAME 
                         FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
                         WHERE TABLE_NAME = ? AND COLUMN_NAME = ? AND CONSTRAINT_NAME = ?",
-                        [$table, $column, $foreignKeyName]
+                    [$table, $column, $foreignKeyName]
                 );
 
                 if (!empty($foreignKeys)) {
-                    $this->database::$capsule::schema()->table($table, function (Blueprint $table) use ($column) {
-                        $table->dropForeign([$column]);
-                    });
+                    $this->database::$capsule::schema()->table(
+                        $table, function (Blueprint $table) use ($column) {
+                            $table->dropForeign([$column]);
+                        }
+                    );
                 }
             }
         }
@@ -75,8 +80,8 @@ class Migration {
     /**
      * Check if a foreign key exists for a given table and column.
      *
-     * @param string $table
-     * @param string $column
+     * @param  string $table
+     * @param  string $column
      * @return bool
      */
     private function checkForeignKeyExistence($table, $column)
@@ -87,11 +92,13 @@ class Migration {
 
         if ($driver === 'mysql') {
             // MySQL check
-            $result = $this->database::$capsule::select("
+            $result = $this->database::$capsule::select(
+                "
                 SELECT CONSTRAINT_NAME 
                 FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
                 WHERE TABLE_NAME = ? AND COLUMN_NAME = ? AND TABLE_SCHEMA = DATABASE()
-            ", [$table, $column]);
+            ", [$table, $column]
+            );
 
             return !empty($result);
         } 

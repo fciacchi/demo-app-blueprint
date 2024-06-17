@@ -5,7 +5,8 @@ use Leaf\Schema;
 use Leaf\Database;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePaymentMethodsTable extends Database {
+class CreatePaymentMethodsTable extends Database
+{
     /**
      * Run the migrations.
      *
@@ -16,9 +17,11 @@ class CreatePaymentMethodsTable extends Database {
         if (!static::$capsule::schema()->hasTable('payment_methods')) {
             Schema::build("payment_methods");
 
-            static::$capsule::schema()->table('payment_methods', function (Blueprint $table) {
-                $table->foreign('employee_id')->references('id')->on('employees');
-            });
+            static::$capsule::schema()->table(
+                'payment_methods', function (Blueprint $table) {
+                    $table->foreign('employee_id')->references('id')->on('employees');
+                }
+            );
         }
 
         (new Migration('2024_06_17_000006_create_payment_methods_table'))->insert();

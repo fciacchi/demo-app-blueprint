@@ -12,7 +12,7 @@ class DonationFactory extends Factory
     {
         $employeeId = rand(2, 5);
         $paymentMethodId = $employeeId - 1;
-        $isRecurring = rand(0,1) === 1;
+        $isRecurring = rand(0, 1) === 1;
         $recurringDays = $isRecurring ? null : rand(30, 365);
 
         return [

@@ -5,7 +5,8 @@ use Leaf\Schema;
 use Leaf\Database;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEmployeesTable extends Database {
+class CreateEmployeesTable extends Database
+{
     /**
      * Run the migrations.
      *
@@ -16,10 +17,12 @@ class CreateEmployeesTable extends Database {
         if (!static::$capsule::schema()->hasTable('employees')) {
             Schema::build("employees");
 
-            static::$capsule::schema()->table('employees', function (Blueprint $table) {
-                $table->string('username')->unique(true)->change();
-                $table->string('email')->unique(true)->change();
-            });
+            static::$capsule::schema()->table(
+                'employees', function (Blueprint $table) {
+                    $table->string('username')->unique(true)->change();
+                    $table->string('email')->unique(true)->change();
+                }
+            );
         }
 
         (new Migration('2024_06_16_000002_create_employees_table'))->insert();
