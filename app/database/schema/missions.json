@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "employee_id:unsignedBigInteger": 123,
+    "fundraiser_id:unsignedBigInteger": 1,
+    "name:string": "Mission A",
+    "website?:string": "www.missiondomain.com",
+    "description?:string": "Random description for Mission",
+    "goal_amount?:integer": 5000,
+    "goal_currency?:string": "EUR",
+    "goal_end_date?:timestamp": "2022-12-31T23:59:59Z",
+    "timestamps": ""
+  }
+  

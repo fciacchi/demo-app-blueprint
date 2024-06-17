@@ -1,0 +1,12 @@
+{
+    "id": 1,
+    "employee_id:unsignedBigInteger": 123,
+    "mission_id:unsignedBigInteger": 456,
+    "payment_method_id:unsignedBigInteger": 789,
+    "amount:integer": 100,
+    "currency:string": "EUR",
+    "recurring:boolean": false,
+    "recurring_days?:integer": null,
+    "timestamps": ""
+  }
+  

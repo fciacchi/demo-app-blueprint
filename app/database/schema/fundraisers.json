@@ -1,6 +1,6 @@
 {
     "id": 1,
-    "employees_id:unsignedBigInteger": 123,
+    "employee_id:unsignedBigInteger": 123,
     "name:string": "Fundraiser A",
     "website?:string": "www.domain.com",
     "description?:string": "Random description for Fundraiser",

@@ -3,6 +3,7 @@
 namespace App\Helpers\Database;
 
 use Leaf\Database;
+use Illuminate\Database\Schema\Blueprint;
 
 class Migration {
     private $database = null;
@@ -38,6 +39,28 @@ class Migration {
                     'migration', $this->fileName
                 )
                 ->delete();
+        }
+    }
+
+    public function dropForeignKey($table, $column)
+    {
+        $foreignKeyName = "{$table}_{$column}_foreign";
+
+        if ($this->database::$capsule::schema()->hasColumn($table, $column)) {
+            if ($this->database::$capsule::schema()->hasTable('INFORMATION_SCHEMA.KEY_COLUMN_USAGE')) {
+                $foreignKeys = $this->database::$capsule::select(
+                    "SELECT CONSTRAINT_NAME 
+                        FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+                        WHERE TABLE_NAME = ? AND COLUMN_NAME = ? AND CONSTRAINT_NAME = ?",
+                        [$table, $column, $foreignKeyName]
+                );
+
+                if (!empty($foreignKeys)) {
+                    $this->database::$capsule::schema()->table($table, function (Blueprint $table) use ($column) {
+                        $table->dropForeign([$column]);
+                    });
+                }
+            }
         }
     }
 

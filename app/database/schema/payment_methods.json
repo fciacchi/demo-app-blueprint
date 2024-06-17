@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "employee_id:unsignedBigInteger": 123,
+    "type:string": "credit_card",
+    "cc_number:string": "4111111111111111",
+    "cc_ccv:string": "123",
+    "expiration_month:string": "12",
+    "expiration_year:string": "2025",
+    "timestamps": ""
+  }
+  

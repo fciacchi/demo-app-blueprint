@@ -32,7 +32,12 @@ class CreateEmployeesTable extends Database {
      */
     public function down()
     {
-        (new Migration('2024_06_16_000002_create_employees_table'))->delete();
+        $migrationObj = new Migration('2024_06_16_000002_create_employees_table');
+        $migrationObj->delete();
+        $migrationObj->dropForeignKey('fundraisers', 'employee_id');
+        $migrationObj->dropForeignKey('missions', 'employee_id');
+        $migrationObj->dropForeignKey('donations', 'employee_id');
+        $migrationObj->dropForeignKey('payment_methods', 'employee_id');
 
         static::$capsule::schema()->dropIfExists("employees");
     }
