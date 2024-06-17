@@ -84,4 +84,41 @@ class FundraiserController extends Controller
             return (new Response())->json(['exception' => $exception->getMessage()], 500);
         }
     }
+
+    /**
+     * Get all fundraisers, paginated.
+     */
+    public function index($page)
+    {
+        $limit = 10;
+        $offset = ($page - 1) * $limit;
+        $total = Fundraiser::count();
+        $totalPages = ceil($total / $limit);
+
+        if ($page > $totalPages) {
+            return (new Response())->json(
+                [
+                    'fundraisers' => [],
+                    'pages' => [
+                        'current' => $page,
+                        'total' => $totalPages
+                    ]
+                ],
+                404
+            );
+        }
+
+        $fundraisers = Fundraiser::orderBy('created_at', 'desc')
+            ->skip($offset)->take($limit)->get();
+
+            return (new Response())->json(
+                [
+                'fundraisers' => $fundraisers,
+                'pages' => [
+                    'current' => $page,
+                    'total' => $totalPages
+                ]
+                ]
+            );
+    }
 }

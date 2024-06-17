@@ -72,4 +72,47 @@ class DonationController extends Controller
             (new Response())->json($donation);
         }
     }
+
+    /**
+     * Get all donations for a specific mission, paginated.
+     */
+    public function index($fundraiserId, $missionId, $page)
+    {
+        $limit = 10;
+        $offset = ($page - 1) * $limit;
+        $total = Donation::where('fundraiser_id', $fundraiserId)
+                         ->where('mission_id', $missionId)
+                         ->count();
+        $totalPages = ceil($total / $limit);
+
+        if ($page > $totalPages) {
+            return (new Response())->json(
+                [
+                    'donations' => [],
+                    'pages' => [
+                        'current' => $page,
+                        'total' => $totalPages
+                    ]
+                ],
+                404
+            );
+        }
+
+        $donations = Donation::where('fundraiser_id', $fundraiserId)
+                             ->where('mission_id', $missionId)
+                             ->orderBy('created_at', 'desc')
+                             ->skip($offset)
+                             ->take($limit)
+                             ->get();
+
+        return (new Response())->json(
+            [
+                'donations' => $donations,
+                'pages' => [
+                    'current' => $page,
+                    'total' => $totalPages
+                ]
+            ]
+        );
+    }
 }

@@ -92,4 +92,41 @@ class MissionController extends Controller
             return (new Response())->json(['exception' => $exception->getMessage()], 500);
         }
     }
+
+    /**
+     * Get all missions for a specific fundraiser, paginated.
+     */
+    public function index($fundraiserId, $page)
+    {
+        $limit = 10;
+        $offset = ($page - 1) * $limit;
+        $total = Mission::where('fundraiser_id', $fundraiserId)->count();
+        $totalPages = ceil($total / $limit);
+
+        if ($page > $totalPages) {
+            return (new Response())->json(
+                [
+                    'missions' => [],
+                    'pages' => [
+                        'current' => $page,
+                        'total' => $totalPages
+                    ]
+                ],
+                404
+            );
+        }
+
+        $missions = Mission::where('fundraiser_id', $fundraiserId)
+            ->orderBy('created_at', 'desc')->skip($offset)->take($limit)->get();
+
+        return (new Response())->json(
+            [
+                'missions' => $missions,
+                'pages' => [
+                    'current' => $page,
+                    'total' => $totalPages
+                ]
+            ]
+        );
+    }
 }
