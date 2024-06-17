@@ -61,13 +61,854 @@ PHP and JS code. Specifically:
 * RectorPHP for Best Practices
 * ESLint for JSX Pages
 
+
+## API Endpoints
+
+### Employees
+
+#### POST /employees
+
+<details>
+    <summary>Payload</summary>
+
+```json
+{
+  "username": "test.foo",
+  "email": "test.foo@example.org",
+  "first_name": "Test",
+  "last_name": "Food",
+  "role": "Software Developer",
+  "department": "IT"
+}
+```
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "id": 1,
+  "username": "test.foo",
+  "email": "test.foo@example.org",
+  "first_name": "Test",
+  "last_name": "Food",
+  "role": "Software Developer",
+  "department": "IT",
+  "created_at": "2024-06-17T21:58:00.000000Z",
+  "updated_at": "2024-06-17T21:58:36.000000Z"
+}
+```
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+</details>
+
+#### GET /employees/{employee_id}
+
+<details>
+    <summary>Payload</summary>
+
+```
+No payload
+```
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "id": 1,
+  "username": "test.foo",
+  "email": "test.foo@example.org",
+  "first_name": "Test",
+  "last_name": "Food",
+  "role": "7VkIem3Tpi",
+  "department": "xs7eJHLqoH",
+  "created_at": "2024-06-17T21:58:00.000000Z",
+  "updated_at": "2024-06-17T21:58:36.000000Z"
+}
+```
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+</details>
+
+#### PUT /employees/{employee_id}
+
+<details>
+    <summary>Payload</summary>
+
+```json
+{
+  "username": "updated.foo",
+  "email": "updated.foo@example.org",
+  "first_name": "Updated",
+  "last_name": "Foo",
+  "role": "Senior Developer",
+  "department": "Engineering"
+}
+```
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```
+204 No Content
+```
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+</details>
+
+### Payment Methods
+
+
+#### POST /employees/{employee_id}/payment-method/
+
+<details>
+    <summary>Payload</summary>
+
+```json
+{
+  "type": "credit_card",
+  "cc_number": "4111111111111111",
+  "cc_ccv": "123",
+  "expiration_month": "12",
+  "expiration_year": "2025"
+}
+```
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "id": 1,
+  "employee_id": 1,
+  "type": "credit_card",
+  "cc_number": "4111111111111111",
+  "cc_ccv": "123",
+  "expiration_month": "12",
+  "expiration_year": "2025",
+  "created_at": "2024-06-17T21:58:00.000000Z",
+  "updated_at": "2024-06-17T21:58:36.000000Z"
+}
+```
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+</details>
+
+#### GET /employees/{employee_id}/payment-method/{payment_method_id}
+
+<details>
+    <summary>Payload</summary>
+
+```
+No payload
+```
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "id": 1,
+  "employee_id": 1,
+  "type": "credit_card",
+  "cc_number": "4111111111111111",
+  "cc_ccv": "123",
+  "expiration_month": "12",
+  "expiration_year": "2025",
+  "created_at": "2024-06-17T21:58:00.000000Z",
+  "updated_at": "2024-06-17T21:58:36.000000Z"
+}
+```
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+</details>
+
+### Fundraisers
+
+
+#### GET /fundraisers/?page=1&expand=1
+
+<details>
+    <summary>Payload</summary>
+
+```
+No payload
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "fundraisers": [
+    {
+      "id": 2,
+      "employee_id": 1,
+      "name": "Test Fundraiser",
+      "website": "https://www.testwebsite.com",
+      "description": "This is a Test Fundraiser inserted from API",
+      "goal_amount": 3000,
+      "goal_currency": "EUR",
+      "goal_end_date": "2024-12-31T00:00:00.000000Z",
+      "created_at": "2024-06-17T21:58:37.000000Z",
+      "updated_at": "2024-06-17T21:58:37.000000Z"
+    },
+    {
+      "id": 1,
+      "employee_id": 1,
+      "name": "Test Change name 1",
+      "website": "https://www.test.foo",
+      "description": "Random Description change for Fundraiser",
+      "goal_amount": 10000,
+      "goal_currency": "USD",
+      "goal_end_date": "2025-05-19T23:30:27.000000Z",
+      "created_at": "2024-06-17T21:58:01.000000Z",
+      "updated_at": "2024-06-17T21:58:37.000000Z"
+    }
+  ],
+  "_collections": {
+    "employees": {
+      "1": {
+        "id": 1,
+        "username": "test.foo",
+        "email": "test.foo@example.org",
+        "first_name": "Test",
+        "last_name": "Food",
+        "role": "7VkIem3Tpi",
+        "department": "xs7eJHLqoH",
+        "created_at": "2024-06-17T21:58:00.000000Z",
+        "updated_at": "2024-06-17T21:58:36.000000Z"
+      }
+    }
+  },
+  "_pages": {
+    "current": 1,
+    "total": 1
+  }
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+```json
+{
+  "fundraisers": [],
+  "_collections": [],
+  "_pages": {
+    "current": 5,
+    "total": 1
+  }
+}
+```
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+#### POST /fundraisers
+
+<details>
+    <summary>Payload</summary>
+
+```json
+{
+  "employee_id": 1,
+  "name": "Test Fundraiser",
+  "website": "https://www.testwebsite.com",
+  "description": "This is a Test Fundraiser inserted from API",
+  "goal_amount": 3000,
+  "goal_currency": "EUR",
+  "goal_end_date": "2024-12-31T00:00:00.01Z"
+}
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "employee_id": 1,
+  "name": "Test Fundraiser",
+  "website": "https://www.testwebsite.com",
+  "description": "This is a Test Fundraiser inserted from API",
+  "goal_amount": 3000,
+  "goal_currency": "EUR",
+  "goal_end_date": "2024-12-31T00:00:00.000000Z",
+  "updated_at": "2024-06-17T22:08:17.000000Z",
+  "created_at": "2024-06-17T22:08:17.000000Z",
+  "id": 3
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+#### GET /fundraisers/{fundraiser_id}
+
+<details>
+    <summary>Payload</summary>
+
+```
+No payload
+
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "id": 1,
+  "employee_id": 2,
+  "name": "Keeling, Balistreri and Conn",
+  "website": "https://www.farrell.com",
+  "description": "Adipisci quidem ducimus beatae aut consequatur totam autem. Voluptatem et architecto nihil rerum accusamus. Esse architecto atque quia.",
+  "goal_amount": 13705,
+  "goal_currency": "EUR",
+  "goal_end_date": "2025-05-22T23:34:30.000000Z",
+  "created_at": "2024-06-17T14:54:31.000000Z",
+  "updated_at": "2024-06-17T14:54:31.000000Z"
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+#### PUT /fundraisers/{fundraiser_id}
+
+<details>
+    <summary>Payload</summary>
+
+```json
+{
+  "name": "Updated Fundraiser",
+  "website": "https://www.updatedwebsite.com",
+  "description": "Updated description",
+  "goal_amount": 5000,
+  "goal_currency": "USD",
+  "goal_end_date": "2025-12-31T00:00:00.01Z"
+}
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```
+204 No Content
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+</details>
+
+### Missions
+
+
+#### GET /fundraisers/{fundraiser_id}/missions/?page=1&expand=1
+
+<details>
+    <summary>Payload</summary>
+
+```
+No payload
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "missions": [
+    {
+      "id": 2,
+      "employee_id": 1,
+      "fundraiser_id": 1,
+      "name": "Test Mission",
+      "website": "https://www.testwebsite.com",
+      "description": "This is a Test Mission inserted from API",
+      "goal_amount": 3000,
+      "goal_currency": "EUR",
+      "goal_end_date": "2024-12-31T00:00:00.000000Z",
+      "created_at": "2024-06-17T21:58:37.000000Z",
+      "updated_at": "2024-06-17T21:58:37.000000Z"
+    },
+    {
+      "id": 1,
+      "employee_id": 1,
+      "fundraiser_id": 1,
+      "name": "Test Change name 1",
+      "website": "https://www.test.foo",
+      "description": "Random Description change for Mission",
+      "goal_amount": 10000,
+      "goal_currency": "USD",
+      "goal_end_date": "2025-05-19T23:30:27.000000Z",
+      "created_at": "2024-06-17T21:58:01.000000Z",
+      "updated_at": "2024-06-17T21:58:37.000000Z"
+    }
+  ],
+  "_collections": {
+    "employees": {
+      "1": {
+        "id": 1,
+        "username": "test.foo",
+        "email": "test.foo@example.org",
+        "first_name": "Test",
+        "last_name": "Food",
+        "role": "7VkIem3Tpi",
+        "department": "xs7eJHLqoH",
+        "created_at": "2024-06-17T21:58:00.000000Z",
+        "updated_at": "2024-06-17T21:58:36.000000Z"
+      }
+    },
+    "fundraisers": {
+      "1": {
+        "id": 1,
+        "employee_id": 1,
+        "name": "Test Fundraiser",
+        "website": "https://www.testwebsite.com",
+        "description": "This is a Test Fundraiser inserted from API",
+        "goal_amount": 3000,
+        "goal_currency": "EUR",
+        "goal_end_date": "2024-12-31T00:00:00.000000Z",
+        "created_at": "2024-06-17T21:58:01.000000Z",
+        "updated_at": "2024-06-17T21:58:37.000000Z"
+      }
+    }
+  },
+  "_pages": {
+    "current": 1,
+    "total": 1
+  }
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+```json
+{
+  "missions": [],
+  "_collections": [],
+  "_pages": {
+    "current": 5,
+    "total": 1
+  }
+}
+```
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+#### POST /fundraisers/{fundraiser_id}/missions/
+
+<details>
+    <summary>Payload</summary>
+
+```json
+{
+  "employee_id": 1,
+  "name": "Test Mission",
+  "website": "https://www.testwebsite.com",
+  "description": "This is a Test Mission inserted from API",
+  "goal_amount": 3000,
+  "goal_currency": "EUR",
+  "goal_end_date": "2024-12-31T00:00:00.01Z"
+}
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "employee_id": 1,
+  "fundraiser_id": 1,
+  "name": "Test Mission",
+  "website": "https://www.testwebsite.com",
+  "description": "This is a Test Mission inserted from API",
+  "goal_amount": 3000,
+  "goal_currency": "EUR",
+  "goal_end_date": "2024-12-31T00:00:00.000000Z",
+  "updated_at": "2024-06-17T22:08:17.000000Z",
+  "created_at": "2024-06-17T22:08:17.000000Z",
+  "id": 3
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+#### GET /fundraisers/{fundraiser_id}/missions/{mission_id}
+
+<details>
+    <summary>Payload</summary>
+
+```
+No payload
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "id": 1,
+  "employee_id": 2,
+  "fundraiser_id": 1,
+  "name": "Keeling, Balistreri and Conn",
+  "website": "https://www.farrell.com",
+  "description": "Adipisci quidem ducimus beatae aut consequatur totam autem. Voluptatem et architecto nihil rerum accusamus. Esse architecto atque quia.",
+  "goal_amount": 13705,
+  "goal_currency": "EUR",
+  "goal_end_date": "2025-05-22T23:34:30.000000Z",
+  "created_at": "2024-06-17T14:54:31.000000Z",
+  "updated_at": "2024-06-17T14:54:31.000000Z"
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+#### PUT /fundraisers/{fundraiser_id}/missions/{mission_id}
+
+<details>
+    <summary>Payload</summary>
+
+```json
+{
+  "name": "Updated Mission",
+  "website": "https://www.updatedwebsite.com",
+  "description": "Updated description",
+  "goal_amount": 5000,
+  "goal_currency": "USD",
+  "goal_end_date": "2025-12-31T00:00:00.01Z"
+}
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```
+204 No Content
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+### Donations
+
+#### GET /fundraisers/{fundraiser_id}/missions/{mission_id}/donations/?page=1&expand=1
+
+<details>
+    <summary>Payload</summary>
+
+```
+No payload
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "donations": [
+    {
+      "id": 2,
+      "employee_id": 1,
+      "mission_id": 1,
+      "payment_method_id": 1,
+      "amount": 15,
+      "currency": "EUR",
+      "created_at": "2024-06-17T21:58:37.000000Z",
+      "updated_at": "2024-06-17T21:58:37.000000Z"
+    },
+    {
+      "id": 1,
+      "employee_id": 1,
+      "mission_id": 1,
+      "payment_method_id": 1,
+      "amount": 20,
+      "currency": "USD",
+      "created_at": "2024-06-17T21:58:01.000000Z",
+      "updated_at": "2024-06-17T21:58:37.000000Z"
+    }
+  ],
+  "_collections": {
+    "employees": {
+      "1": {
+        "id": 1,
+        "username": "test.foo",
+        "email": "test.foo@example.org",
+        "first_name": "Test",
+        "last_name": "Food",
+        "role": "7VkIem3Tpi",
+        "department": "xs7eJHLqoH",
+        "created_at": "2024-06-17T21:58:00.000000Z",
+        "updated_at": "2024-06-17T21:58:36.000000Z"
+      }
+    },
+    "fundraisers": {
+      "1": {
+        "id": 1,
+        "employee_id": 1,
+        "name": "Test Fundraiser",
+        "website": "https://www.testwebsite.com",
+        "description": "This is a Test Fundraiser inserted from API",
+        "goal_amount": 3000,
+        "goal_currency": "EUR",
+        "goal_end_date": "2024-12-31T00:00:00.000000Z",
+        "created_at": "2024-06-17T21:58:01.000000Z",
+        "updated_at": "2024-06-17T21:58:37.000000Z"
+      }
+    },
+    "missions": {
+      "1": {
+        "id": 1,
+        "employee_id": 1,
+        "fundraiser_id": 1,
+        "name": "Test Mission",
+        "website": "https://www.testwebsite.com",
+        "description": "This is a Test Mission inserted from API",
+        "goal_amount": 3000,
+        "goal_currency": "EUR",
+        "goal_end_date": "2024-12-31T00:00:00.000000Z",
+        "created_at": "2024-06-17T21:58:01.000000Z",
+        "updated_at": "2024-06-17T21:58:37.000000Z"
+      }
+    }
+  },
+  "_pages": {
+    "current": 1,
+    "total": 1
+  }
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+```json
+{
+  "donations": [],
+  "_collections": [],
+  "_pages": {
+    "current": "5",
+    "total": 1
+  }
+}
+```
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+#### POST /fundraisers/{fundraiser_id}/missions/{mission_id}/donations/
+
+<details>
+    <summary>Payload</summary>
+
+```json
+{
+  "employee_id": 2,
+  "payment_method_id": 1,
+  "amount": 15,
+  "currency": "EUR"
+}
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "employee_id": 2,
+  "mission_id": 1,
+  "payment_method_id": 1,
+  "amount": 15,
+  "currency": "EUR",
+  "updated_at": "2024-06-17T22:08:17.000000Z",
+  "created_at": "2024-06-17T22:08:17.000000Z",
+  "id": 3
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
+#### GET /fundraisers/{fundraiser_id}/missions/{mission_id}/donations/{donation_id}
+
+<details>
+    <summary>Payload</summary>
+
+```
+No payload
+```
+
+</details>
+
+<details>
+    <summary>Success Response</summary>
+
+```json
+{
+  "id": 1,
+  "employee_id": 2,
+  "mission_id": 1,
+  "payment_method_id": 1,
+  "amount": 15,
+  "currency": "EUR",
+  "created_at": "2024-06-17T14:54:31.000000Z",
+  "updated_at": "2024-06-17T14:54:31.000000Z"
+}
+```
+
+</details>
+
+<details>
+    <summary>Error Responses</summary>
+
+- 404 Not found
+- 406 Not valid data
+- 422 Missing mandatory field
+- 500 Exception
+
+</details>
+
 ## WIP
 
-- API Definition (group /api)
-- Split of Controller and Model (for DB queries)
-- Add Postman collection for API test (locally) 
-- Main Template for JSX
 - Add PHPUnit tests
+- Main Template for JSX
 
 ## TODO
 

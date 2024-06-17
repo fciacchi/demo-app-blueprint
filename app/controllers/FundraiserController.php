@@ -101,7 +101,7 @@ class FundraiserController extends Controller
                     'fundraisers' => [],
                     '_collections' => [],
                     '_pages' => [
-                        'current' => $page,
+                        'current' => intval($page),
                         'total' => $totalPages
                     ]
                 ],

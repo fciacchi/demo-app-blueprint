@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Employee;
 use Exception;
-use Leaf\Http\Request;
 use Leaf\Http\Response;
 
 class EmployeeController extends Controller
