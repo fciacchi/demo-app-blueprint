@@ -5,10 +5,13 @@
     <!-- Include the standard you want to extend -->
     <rule ref="PSR12"/>
 
+    <exclude-pattern>**/*.blade.php</exclude-pattern>
+
     <rule ref="Squiz.Commenting">
         <exclude name="Squiz.Commenting.ClassComment"/>
         <exclude name="Squiz.Commenting.FileComment"/>
         <exclude name="Squiz.Commenting.FunctionComment"/>
+        <exclude name="Squiz.Commenting.VariableComment"/>
         <exclude name="Generic.Commenting.DocComment.TagEnd"/>
     </rule>
 
@@ -20,6 +23,16 @@
     <!-- Exclude the rule for enforcing namespaces under app/database/migrations/ -->
     <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
         <exclude-pattern>app/database/migrations/*</exclude-pattern>
+    </rule>
+
+        <!-- Exclude the rule for Blade templates with no PHP code -->
+    <rule ref="Generic.Files.InlineHTML">
+        <exclude-pattern>app/views/*.blade.php</exclude-pattern>
+    </rule>
+
+    <!-- Exclude the rule for disallowing short open tags in Blade templates -->
+    <rule ref="Generic.PHP.DisallowShortOpenTag">
+        <exclude-pattern>app/views/*.blade.php</exclude-pattern>
     </rule>
 
     <!-- Optionally, you can disable all rules from Generic.Commenting -->

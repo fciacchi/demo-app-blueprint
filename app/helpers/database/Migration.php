@@ -7,10 +7,8 @@ use Illuminate\Database\Schema\Blueprint;
 
 class Migration
 {
-    /** @var Database $database */
     private readonly \Leaf\Database $database;
 
-    /** @var string $tableName */
     private string $tableName = 'migrations';
 
     public function __construct(private $fileName)
@@ -58,7 +56,8 @@ class Migration
     {
         $foreignKeyName = sprintf('%s_%s_foreign', $table, $column);
 
-        if ($this->database::$capsule::schema()->hasColumn($table, $column) 
+        if (
+            $this->database::$capsule::schema()->hasColumn($table, $column)
             && $this->checkForeignKeyExistence($table, $column)
         ) {
             $foreignKeys = $this->database::$capsule::select(

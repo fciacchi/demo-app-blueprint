@@ -6,7 +6,7 @@ use App\Models\Mission;
 
 class MissionFactory extends Factory
 {
-    /** @var Mission $model */
+    /** @var string $model */
     public $model = Mission::class;
 
     public function definition(): array

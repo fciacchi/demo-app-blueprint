@@ -6,10 +6,9 @@ use App\Models\PaymentMethod;
 
 class PaymentMethodFactory extends Factory
 {
-    /** @var PaymentMethod $model */
+    /** @var string $model */
     public $model = PaymentMethod::class;
 
-    /** @var integer $employeeIdCounter */
     private static int $employeeIdCounter = 2;
 
     public function definition(): array

@@ -6,7 +6,7 @@ use App\Models\Employee;
 
 class EmployeeFactory extends Factory
 {
-    /** @var Employee $model */
+    /** @var string $model */
     public $model = Employee::class;
 
     public function definition(): array

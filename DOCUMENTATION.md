@@ -51,15 +51,24 @@ The first one defining the seeds data using the Faker library (and some
 random IDs), and the second one deciding how many fake entries for each
 table to create.
 
+## Linters and Validations
+
+The systems uses several Linters to enforce Coding standards for both
+PHP and JS code. Specifically:
+
+* PHPCS for Code Validation
+* PHPStan for Code Consistency
+* RectorPHP for Best Practices
+* ESLint for JSX Pages
+
 ## WIP
 
 - API Definition (group /api)
 - Split of Controller and Model (for DB queries)
+- Add Postman collection for API test (locally) 
 - Main Template for JSX
-- Add phpspec, rectorphp and phpstan
 - Add PHPUnit tests
 - Add Github Workflow
-- Add Postman collection for API test (locally) 
 
 ## TODO
 

@@ -10,14 +10,14 @@ class Mission extends Model
      * @var string[]
      */
     protected $fillable = [
-        'employee_id', 
-        'fundraiser_id', 
-        'name', 
-        'website', 
-        'image', 
-        'description', 
-        'goal_amount', 
-        'goal_currency', 
+        'employee_id',
+        'fundraiser_id',
+        'name',
+        'website',
+        'image',
+        'description',
+        'goal_amount',
+        'goal_currency',
         'goal_end_date',
     ];
 

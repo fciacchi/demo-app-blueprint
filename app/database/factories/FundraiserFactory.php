@@ -6,7 +6,7 @@ use App\Models\Fundraiser;
 
 class FundraiserFactory extends Factory
 {
-    /** @var Fundraiser $model */
+    /** @var string $model */
     public $model = Fundraiser::class;
 
     public function definition(): array
