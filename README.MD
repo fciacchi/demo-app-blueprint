@@ -13,6 +13,14 @@ For this see the [Documentation](./DOCUMENTATION.md)
 ## Installation
 
 ```shell
+$ chmod a+x run-*.sh
+$ ./run-install.sh
+```
+
+<details>
+  <summary>If you want to run the installer manually</summary>
+
+```shell
 # INSTALL COMPOSER
 $ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 $ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
@@ -31,27 +39,51 @@ $ php leaf db:seed
 # SET-UP DEFAULT ENV
 $ cp .env.example .env
 ```
+</details>
 
 ## DEV Environment
 
-Requirements:
-* PHP Version: 8.2.18
-* Node Version: 18.20.2
-* npm Version: 10.5.0
-
 ```shell
-$ composer install
-$ php leaf db:migrate
-$ npm i
-$ npm run dev
+$ ./run-dev.sh
 ```
 
 Open: http://localhost:5500
 
-### Database Local Debug
+<details>
+  <summary>If you want to run DEV manually</summary>
 
 ```shell
-npx drizzle-kit studio
+$ composer install
+$ npm install
+$ npm run db:migrate
+$ npm run dev
+```
+</details>
+
+
+## Database
+
+### Reset (+seeding)
+
+```shell
+$ ./run-db.sh
+```
+
+<details>
+  <summary>If you want to reset DB manually</summary>
+
+```shell
+$ composer install
+$ php leaf db:reset
+$ php leaf db:migrate
+$ php leaf db:seed
+```
+</details>
+
+### Local access (SQLite)
+
+```shell
+$ npx drizzle-kit studio
 ```
 
 Open: https://local.drizzle.studio

@@ -6,10 +6,10 @@ The following project is a demo application that has:
 * Admin backoffice
 
 The idea is to build the following application using 
-[Leaf PHP Framework](https://leafphp.dev/). This Framework has been chosen 
+[LeafPHP Framework](https://leafphp.dev/). This Framework has been chosen 
 over Laravel, because I already have working knowledge with it and due to 
 the tight timeline of development, it's a better choice. However 
-**Leaf PHP** is very similar to Laravel, having both Inertia 
+**LeafPHP** is very similar to Laravel, having both Inertia 
 and Vite for working with JSX pages and Eloquent ORM for the database.
 
 A Live version of the App is accessible at: https://demo.asplanned.app
@@ -28,10 +28,31 @@ For the purpose of the test, it is being left out:
 
 Diagram built with: [DBDiagram.io](https://dbdiagram.io/)
 
+
+### Implementation
+
+Database entities have been implemented using the deafult LeafPHP 
+functionalities. For each database table it has been created:
+
+* `app/database/schema/[table].json`
+* `app/database/migrations/[date_id_table].php`
+* `app/models/[table].php`
+
+That ensure consistency across the different tables, and the validity
+of the foreign-keys and default timestamp values.
+
+In addion, the framework allows to create 'Seeders' that pre-popoluate
+the databse with test data. A seeder is created using two classes:
+
+* `app/database/factories/[table]Factory.php`
+* `app/database/seeds/[table]Seeder.php`
+
+The first one defining the seeds data using the Faker library (and some
+random IDs), and the second one deciding how many fake entries for each
+table to create.
+
 ## WIP
 
-- Database entities and migrations
-- Database seeding
 - API Definition (group /api)
 - Split of Controller and Model (for DB queries)
 - Main Template for JSX

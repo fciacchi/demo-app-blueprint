@@ -47,7 +47,7 @@ class Migration {
         $foreignKeyName = "{$table}_{$column}_foreign";
 
         if ($this->database::$capsule::schema()->hasColumn($table, $column)) {
-            if ($this->database::$capsule::schema()->hasTable('INFORMATION_SCHEMA.KEY_COLUMN_USAGE')) {
+            if ($this->checkForeignKeyExistence($table, $column)) {
                 $foreignKeys = $this->database::$capsule::select(
                     "SELECT CONSTRAINT_NAME 
                         FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
@@ -70,5 +70,32 @@ class Migration {
             ->where(
                 'migration', $this->fileName
             )->exists();
+    }
+
+    /**
+     * Check if a foreign key exists for a given table and column.
+     *
+     * @param string $table
+     * @param string $column
+     * @return bool
+     */
+    private function checkForeignKeyExistence($table, $column)
+    {
+        // Check database driver
+        $connection = $this->database::$capsule::connection();
+        $driver = $connection->getDriverName();
+
+        if ($driver === 'mysql') {
+            // MySQL check
+            $result = $this->database::$capsule::select("
+                SELECT CONSTRAINT_NAME 
+                FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+                WHERE TABLE_NAME = ? AND COLUMN_NAME = ? AND TABLE_SCHEMA = DATABASE()
+            ", [$table, $column]);
+
+            return !empty($result);
+        } 
+
+        return false;
     }
 }

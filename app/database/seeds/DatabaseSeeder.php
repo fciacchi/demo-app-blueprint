@@ -13,7 +13,11 @@ class DatabaseSeeder extends Seeder
     public function run(): array
     {
         return [
-            UsersSeeder::class,
+            EmployeeSeeder::class,
+            FundraiserSeeder::class,
+            MissionSeeder::class,
+            PaymentMethodSeeder::class,
+            DonationSeeder::class,
         ];
     }
 }

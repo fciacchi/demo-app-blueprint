@@ -2,22 +2,14 @@
 
 namespace App\Models;
 
-class User extends Model
+class PaymentMethod extends Model
 {
     /**
      * The attributes that are mass assignable.
      * @var array
      */
     protected $fillable = [
-        'fullname', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
+        'employee_id', 'type', 'cc_number', 'cc_ccv', 'expiration_month', 'expiration_year'
     ];
 
     /**
@@ -31,6 +23,15 @@ class User extends Model
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
+
+    /**
+     * Define relationships.
+     */
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }
