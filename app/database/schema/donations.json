@@ -5,7 +5,7 @@
     "payment_method_id:unsignedBigInteger": 789,
     "amount:integer": 100,
     "currency:string": "EUR",
-    "recurring:boolean": false,
+    "recurring?:boolean": false,
     "recurring_days?:integer": null,
     "timestamps": ""
   }

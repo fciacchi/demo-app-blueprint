@@ -62,8 +62,7 @@ class DonationController extends Controller
      */
     public function show($fundraiserId, $missionId, $id): void
     {
-        $donation = Donation::where('fundraiser_id', $fundraiserId)
-                            ->where('mission_id', $missionId)
+        $donation = Donation::where('mission_id', $missionId)
                             ->find($id);
 
         if (!$donation) {

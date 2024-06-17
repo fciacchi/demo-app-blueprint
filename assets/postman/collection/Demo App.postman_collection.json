@@ -101,6 +101,69 @@
 			"response": []
 		},
 		{
+			"name": "Add an Payment Method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"postman.setEnvironmentVariable(\"lastPaymentId\", jsonData.id);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 201;",
+							"tests['There is a payment-method-id set'] = jsonData.id !== undefined;",
+							"tests[\"User is created correctly\"] = jsonData.cc_number === '1234567812345678';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/employees/1/payment-method/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"credit_ard\",\n\t\"cc_number\": \"1234567812345678\",\n\t\"cc_ccv\": \"123\",\n\t\"expiration_month\": \"05\",\n\t\"expiration_year\": \"2026\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Payment Method",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 200;",
+							"tests['There is a user-id set'] = jsonData.id !== undefined;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/employees/1/payment-method/{{lastPaymentId}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "Get All Fundraisers",
 			"event": [
 				{
@@ -243,6 +306,276 @@
 					"mode": "raw",
 					"raw": "{\n\t\"employee_id\": 1,\n    \"name\": \"Test Change name 1\",\n    \"website\": \"https://www.test.foo\",\n    \"description\": \"Random Description change for Fundraiser\",\n    \"goal_amount\": 10000,\n    \"goal_currency\": \"USD\"\n}"
 				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Missions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 200;",
+							"tests['There is a collection set'] = jsonData.missions !== undefined;",
+							"tests['There is pagination'] = jsonData._pages.current === 1;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "http://localhost:5500/api/fundraisers/1/missions/?page=1&expand=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5500",
+					"path": [
+						"api",
+						"fundraisers",
+						"1",
+						"missions",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "expand",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Mission",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 201;",
+							"tests['There is a fundraiser-id set'] = jsonData.id !== undefined;",
+							"tests[\"Fundraiser is created correctly\"] = jsonData.name === 'Test Mission';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/fundraisers/1/missions/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"employee_id\": 1,\n\t\"name\": \"Test Mission\",\n\t\"website\": \"https://www.testwebsite.com\",\n\t\"description\": \"This is a Test Mission inserted from API\",\n\t\"goal_amount\": 3000,\n\t\"goal_currency\": \"EUR\",\n\t\"goal_end_date\": \"2024-12-31T00:00:00.01Z\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Mission",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 200;",
+							"tests['There is a fundraiser-id set'] = jsonData.id !== undefined;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/fundraisers/1/missions/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Missions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is success\"] = responseCode.code === 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/fundraisers/1/missions/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"employee_id\": 1,\n    \"name\": \"Test Change name 2\",\n    \"website\": \"https://www.test.foo\",\n    \"description\": \"Random Description change for Mission\",\n    \"goal_amount\": 10000,\n    \"goal_currency\": \"USD\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Donations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 200;",
+							"tests['There is a collection set'] = jsonData.donations !== undefined;",
+							"tests['There is pagination'] = jsonData._pages.current === 1;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "http://localhost:5500/api/fundraisers/1/missions/1/donations/?page=1&expand=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5500",
+					"path": [
+						"api",
+						"fundraisers",
+						"1",
+						"missions",
+						"1",
+						"donations",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "expand",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Donation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"postman.setEnvironmentVariable(\"lastMissionId\", jsonData.id);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 201;",
+							"tests['There is a fundraiser-id set'] = jsonData.id !== undefined;",
+							"tests[\"Fundraiser is created correctly\"] = jsonData.amount === 15;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/fundraisers/1/missions/1/donations/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"employee_id\": 2,\n\t\"payment_method_id\": 1,\n\t\"amount\": 15,\n\t\"currency\": \"EUR\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Donation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 200;",
+							"tests['There is a fundraiser-id set'] = jsonData.id !== undefined;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/fundraisers/1/missions/1/donations/{{lastMissionId}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
 				"description": ""
 			},
 			"response": []

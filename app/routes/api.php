@@ -93,7 +93,6 @@ app()->put(
 app()->get(
     '/api/fundraisers/{fundraiser_id}/missions/',
     static function ($fundraiser_id): void {
-        echo "I enter in GET ALL";
         $expand = $_GET['expand'] ?? false;
         $page = $_GET['page'] ?? 1;
         $controller = new MissionController();
@@ -104,7 +103,6 @@ app()->get(
 app()->post(
     '/api/fundraisers/{fundraiser_id}/missions/',
     static function ($fundraiser_id): void {
-        echo "I enter in POST";
         $data = json_decode(file_get_contents('php://input'), true);
         $controller = new MissionController();
         $controller->store($fundraiser_id, $data);
