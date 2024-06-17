@@ -11,7 +11,7 @@ use Leaf\Http\Response;
 class MissionController extends Controller
 {
     /**
-     * Store a new mission for a fundraiser.
+     * Store a new mission for a specific fundraiser.
      */
     public function store($fundraiserId, $data)
     {
@@ -44,9 +44,9 @@ class MissionController extends Controller
         }
     }
 
-    /**
-     * Show a mission by ID for a specific fundraiser.
-     */
+   /**
+    * Show a mission by ID for a specific fundraiser.
+    */
     public function show($fundraiserId, $id): void
     {
         $mission = Mission::where('fundraiser_id', $fundraiserId)->find($id);
@@ -83,7 +83,7 @@ class MissionController extends Controller
         }
 
         try {
-            unset($data['id'], $data['created_at'], $data['updated_at']);
+            unset($data['id'], $data['employee_id'], $data['created_at'], $data['updated_at']);
             $data['updated_at'] = date('Y-m-d H:i:s');
 
             $mission->update($data);
@@ -96,7 +96,7 @@ class MissionController extends Controller
     /**
      * Get all missions for a specific fundraiser, paginated.
      */
-    public function index($fundraiserId, $page)
+    public function index($fundraiserId, $page, $expand = false)
     {
         $limit = 10;
         $offset = ($page - 1) * $limit;
@@ -107,8 +107,9 @@ class MissionController extends Controller
             return (new Response())->json(
                 [
                     'missions' => [],
-                    'pages' => [
-                        'current' => $page,
+                    '_collections' => [],
+                    '_pages' => [
+                        'current' => intval($page),
                         'total' => $totalPages
                     ]
                 ],
@@ -116,14 +117,36 @@ class MissionController extends Controller
             );
         }
 
-        $missions = Mission::where('fundraiser_id', $fundraiserId)
-            ->orderBy('created_at', 'desc')->skip($offset)->take($limit)->get();
+        $query = Mission::where('fundraiser_id', $fundraiserId)
+            ->orderBy('created_at', 'desc')->skip($offset)->take($limit);
+
+        $missions = $query->get();
+
+        $allCollections = [];
+        if ($expand) {
+            $employeeCollection = [];
+            foreach ($missions as $mission) {
+                $employeeId = $mission['employee_id'];
+                $employee = Employee::find($employeeId);
+                $employeeCollection[$employeeId] = $employee;
+            }
+
+            $fundraiser = Fundraiser::find($fundraiserId);
+
+            $allCollections = [
+                'employees' => $employeeCollection,
+                'fundraisers' => [
+                    $fundraiserId => $fundraiser,
+                ]
+            ];
+        }
 
         return (new Response())->json(
             [
                 'missions' => $missions,
-                'pages' => [
-                    'current' => $page,
+                '_collections' => $allCollections,
+                '_pages' => [
+                    'current' => intval($page),
                     'total' => $totalPages
                 ]
             ]

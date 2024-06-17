@@ -65,7 +65,7 @@ class FundraiserController extends Controller
             return (new Response())->json(['error' => 'Validation errors'], 406);
         }
 
-        if (!isset($data['name'])) {
+        if (!isset($data['employee_id']) || !isset($data['name'])) {
             return (new Response())->json(['error' => 'Missing required fields'], 422);
         }
 

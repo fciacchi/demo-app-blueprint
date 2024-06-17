@@ -76,12 +76,11 @@ class DonationController extends Controller
     /**
      * Get all donations for a specific mission, paginated.
      */
-    public function index($fundraiserId, $missionId, $page)
+    public function index($fundraiserId, $missionId, $page, $expand = false)
     {
         $limit = 10;
         $offset = ($page - 1) * $limit;
-        $total = Donation::where('fundraiser_id', $fundraiserId)
-                         ->where('mission_id', $missionId)
+        $total = Donation::where('mission_id', $missionId)
                          ->count();
         $totalPages = ceil($total / $limit);
 
@@ -89,8 +88,8 @@ class DonationController extends Controller
             return (new Response())->json(
                 [
                     'donations' => [],
-                    'pages' => [
-                        'current' => $page,
+                    '_pages' => [
+                        'current' => intval($page),
                         'total' => $totalPages
                     ]
                 ],
@@ -98,18 +97,46 @@ class DonationController extends Controller
             );
         }
 
-        $donations = Donation::where('fundraiser_id', $fundraiserId)
-                             ->where('mission_id', $missionId)
+        $donations = Donation::where('mission_id', $missionId)
                              ->orderBy('created_at', 'desc')
                              ->skip($offset)
                              ->take($limit)
                              ->get();
 
+        $allCollections = [];
+        if ($expand) {
+            $employeeCollection = [];
+            $fundraiser = Fundraiser::find($fundraiserId);
+            $mission = Mission::find($missionId);
+
+            $creatorId = $fundraiser['employee_id'];
+            $creator = Employee::find($creatorId);
+            $employeeCollection[$creatorId] = $creator;
+
+            foreach ($donations as $donation) {
+                $employeeId = $donation['employee_id'];
+                $employee = Employee::find($employeeId);
+                $employeeCollection[$employeeId] = $employee;
+            }
+
+
+            $allCollections = [
+                'employees' => $employeeCollection,
+                'fundraisers' => [
+                    $fundraiserId => $fundraiser,
+                ],
+                'missions' => [
+                    $missionId => $mission,
+                ]
+            ];
+        }//end if
+
         return (new Response())->json(
             [
                 'donations' => $donations,
-                'pages' => [
-                    'current' => $page,
+                '_collections' => $allCollections,
+                '_pages' => [
+                    'current' => intval($page),
                     'total' => $totalPages
                 ]
             ]
