@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="tests/bootstrap.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" cacheDirectory=".phpunit.cache">
+  <coverage>
+    <!-- <report>
+      <clover outputFile="tests/logs/clover.xml"/>
+      <html outputDirectory="tests/coverage"/>
+    </report> -->
+  </coverage>
+  <testsuites>
+    <testsuite name="Unit Tests">
+      <directory>./tests</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <junit outputFile="tests/logs/junit.xml"/>
+  </logging>
+  <php>
+    <env name="DB_CONNECTION" value="sqlite"/>
+    <env name="DB_DATABASE" value=":memory:"/>
+    <env name="DB_USERNAME" value=""/>
+    <env name="DB_PASSWORD" value=""/>
+  </php>
+  <source>
+    <include>
+      <directory suffix=".php">./app</directory>
+    </include>
+  </source>
+</phpunit>

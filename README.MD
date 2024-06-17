@@ -107,6 +107,22 @@ $ ./vendor/bin/rector process app/
 ```
 </details>
 
+## Tests
+
+To run the tests, you can run the following command:
+
+```shell
+$ ./run-tests.sh
+```
+
+<details>
+  <summary>If you want to run linters manually</summary>
+
+```shell
+$ ./vendor/bin/phpunit
+```
+</details>
+
 ## Plugins
 
 <a href="./assets/postman/chrome-app/postman_extension_5_5_6_0.crx"><img src="./assets/images/plugin-postman.png" width="60" alt="Postman"></a>
