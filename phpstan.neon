@@ -1,6 +1,9 @@
 parameters:
     level: 5
     paths:
-        - 'app/'
+        - app
+    ignoreErrors:
+        - message: '#Call to an undefined static method App\\Models\\[a-zA-Z]+::[a-zA-Z]+\(\).#'
+          path: %currentWorkingDirectory%/app/controllers/*.php
     excludePaths:
         - 'app/views/*'

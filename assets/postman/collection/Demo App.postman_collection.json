@@ -1,0 +1,104 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Demo App",
+		"_postman_id": "24a95037-4121-24d1-2485-53b11335e662",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add an Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 201;",
+							"tests['There is a user-id set'] = jsonData.id !== undefined;",
+							"tests[\"User is created correctly\"] = jsonData.first_name === 'John';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/employees",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"ron.stewart\",\n\t\"email\": \"ron@bar.com\",\n\t\"first_name\": \"John\",\n\t\"last_name\": \"Smith\",\n\t\"role\": \"Software Developer\",\n\t\"department\": \"IT\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Status code is success\"] = responseCode.code === 200;",
+							"tests['There is a user-id set'] = jsonData.id !== undefined;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/employees/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update an Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is success\"] = responseCode.code === 204;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5500/api/employees/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"username\": \"test.foo\",\n    \"email\": \"test.foo@example.org\",\n    \"first_name\": \"Test\",\n    \"last_name\": \"Food\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
