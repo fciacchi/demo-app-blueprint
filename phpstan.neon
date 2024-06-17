@@ -3,5 +3,4 @@ parameters:
     paths:
         - 'app/'
     excludePaths:
-        - '*/GitHooks/*'
-        - '*/tests/*'
+        - 'app/views/*'

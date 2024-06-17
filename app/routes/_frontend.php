@@ -1,7 +1,8 @@
 <?php
 
 app()->get(
-    '/hello', function () {
+    '/hello',
+    static function (): void {
         inertia('Hello');
     }
 );

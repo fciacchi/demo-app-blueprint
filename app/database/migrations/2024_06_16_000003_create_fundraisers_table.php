@@ -9,17 +9,16 @@ class CreateFundraisersTable extends Database
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         if (!static::$capsule::schema()->hasTable('fundraisers')) {
             Schema::build("fundraisers");
 
             static::$capsule::schema()->table(
-                'fundraisers', function (Blueprint $table) {
-                    $table->foreign('employee_id')->references('id')->on('employees');
+                'fundraisers',
+                static function (Blueprint $blueprint): void {
+                    $blueprint->foreign('employee_id')->references('id')->on('employees');
                 }
             );
         }
@@ -29,14 +28,12 @@ class CreateFundraisersTable extends Database
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        $migrationObj = new Migration('2024_06_16_000003_create_fundraisers_table');
-        $migrationObj->delete();
-        $migrationObj->dropForeignKey('missions', 'fundraiser_id');
+        $migration = new Migration('2024_06_16_000003_create_fundraisers_table');
+        $migration->delete();
+        $migration->dropForeignKey('missions', 'fundraiser_id');
 
         static::$capsule::schema()->dropIfExists("fundraisers");
     }

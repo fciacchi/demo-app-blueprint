@@ -60,7 +60,6 @@ $ npm run dev
 ```
 </details>
 
-
 ## Database
 
 ### Reset (+seeding)
@@ -87,6 +86,26 @@ $ npx drizzle-kit studio
 ```
 
 Open: https://local.drizzle.studio
+
+## Linters
+
+To run the linters, you can run the following command:
+
+
+```shell
+$ ./run-linters.sh
+```
+
+<details>
+  <summary>If you want to run linters manually</summary>
+
+```shell
+$ ./vendor/bin/phpcbf app/
+$ ./vendor/bin/phpcs app/
+$ ./vendor/bin/phpstan analyse -c phpstan.neon
+$ ./vendor/bin/rector process app/
+```
+</details>
 
 ## Plugins
 

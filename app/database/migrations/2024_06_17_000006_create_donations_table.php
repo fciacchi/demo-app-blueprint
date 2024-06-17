@@ -9,19 +9,18 @@ class CreateDonationsTable extends Database
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         if (!static::$capsule::schema()->hasTable('donations')) {
             Schema::build("donations");
 
             static::$capsule::schema()->table(
-                'donations', function (Blueprint $table) {
-                    $table->foreign('employee_id')->references('id')->on('employees');
-                    $table->foreign('mission_id')->references('id')->on('missions');
-                    $table->foreign('payment_method_id')->references('id')->on('payment_methods');
+                'donations',
+                static function (Blueprint $blueprint): void {
+                    $blueprint->foreign('employee_id')->references('id')->on('employees');
+                    $blueprint->foreign('mission_id')->references('id')->on('missions');
+                    $blueprint->foreign('payment_method_id')->references('id')->on('payment_methods');
                 }
             );
         }
@@ -31,13 +30,11 @@ class CreateDonationsTable extends Database
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        $migrationObj = new Migration('2024_06_17_000006_create_donations_table');
-        $migrationObj->delete();
+        $migration = new Migration('2024_06_17_000006_create_donations_table');
+        $migration->delete();
 
         static::$capsule::schema()->dropIfExists("donations");
     }

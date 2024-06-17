@@ -7,7 +7,7 @@ class Fundraiser extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'employee_id', 'name', 'website', 'image', 'description', 'goal_amount', 'goal_currency', 'goal_end_date'
@@ -16,7 +16,7 @@ class Fundraiser extends Model
     /**
      * Indicates if the model should be timestamped.
      *
-     * @var bool
+     * @var boolean
      */
     public $timestamps = true;
 

@@ -9,18 +9,17 @@ class CreateEmployeesTable extends Database
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         if (!static::$capsule::schema()->hasTable('employees')) {
             Schema::build("employees");
 
             static::$capsule::schema()->table(
-                'employees', function (Blueprint $table) {
-                    $table->string('username')->unique(true)->change();
-                    $table->string('email')->unique(true)->change();
+                'employees',
+                static function (Blueprint $blueprint): void {
+                    $blueprint->string('username')->unique()->change();
+                    $blueprint->string('email')->unique()->change();
                 }
             );
         }
@@ -30,17 +29,15 @@ class CreateEmployeesTable extends Database
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        $migrationObj = new Migration('2024_06_16_000002_create_employees_table');
-        $migrationObj->delete();
-        $migrationObj->dropForeignKey('fundraisers', 'employee_id');
-        $migrationObj->dropForeignKey('missions', 'employee_id');
-        $migrationObj->dropForeignKey('donations', 'employee_id');
-        $migrationObj->dropForeignKey('payment_methods', 'employee_id');
+        $migration = new Migration('2024_06_16_000002_create_employees_table');
+        $migration->delete();
+        $migration->dropForeignKey('fundraisers', 'employee_id');
+        $migration->dropForeignKey('missions', 'employee_id');
+        $migration->dropForeignKey('donations', 'employee_id');
+        $migration->dropForeignKey('payment_methods', 'employee_id');
 
         static::$capsule::schema()->dropIfExists("employees");
     }

@@ -7,10 +7,8 @@ class DeletePreviousTables extends Database
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         static::$capsule::schema()->dropIfExists('password_resets');
         static::$capsule::schema()->dropIfExists('users');
@@ -20,10 +18,8 @@ class DeletePreviousTables extends Database
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         (new Migration('2024_06_16_000001_delete_previous_tables'))->delete();
     }

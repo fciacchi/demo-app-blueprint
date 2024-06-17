@@ -7,7 +7,7 @@ class PaymentMethod extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'employee_id', 'type', 'cc_number', 'cc_ccv', 'expiration_month', 'expiration_year'
@@ -16,7 +16,7 @@ class PaymentMethod extends Model
     /**
      * Indicates if the model should be timestamped.
      *
-     * @var bool
+     * @var boolean
      */
     public $timestamps = true;
 

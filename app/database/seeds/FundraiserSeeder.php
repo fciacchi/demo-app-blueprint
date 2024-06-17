@@ -9,11 +9,9 @@ class FundraiserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        (new FundraiserFactory)->create(1)->save();
+        (new FundraiserFactory())->create(1)->save();
     }
 }

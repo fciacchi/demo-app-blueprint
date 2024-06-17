@@ -9,11 +9,9 @@ class PaymentMethodSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        (new PaymentMethodFactory)->create(4)->save();
+        (new PaymentMethodFactory())->create(4)->save();
     }
 }

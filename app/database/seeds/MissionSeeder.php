@@ -9,11 +9,9 @@ class MissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        (new MissionFactory)->create(2)->save();
+        (new MissionFactory())->create(2)->save();
     }
 }

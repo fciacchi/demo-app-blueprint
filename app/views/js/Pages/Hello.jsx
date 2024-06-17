@@ -1,7 +1,8 @@
-import { Link, Head } from '@inertiajs/react';
+import React from 'react'
+import { Link, Head } from '@inertiajs/react'
 
 const Hello = ({ auth }) => {
-    return (
+  return (
         <>
             <Head title="Hello" />
             <div>
@@ -10,7 +11,7 @@ const Hello = ({ auth }) => {
                 <Link href="/login">Go to Login</Link>
             </div>
         </>
-    );
-};
+  )
+}
 
-export default Hello;
+export default Hello

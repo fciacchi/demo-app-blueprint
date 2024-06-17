@@ -1,10 +1,9 @@
 <?php
 
 app()->get(
-    '/', function () {
-        /**
-         * `render(view, [])` is the same as `echo view(view, [])`
-         */
+    '/',
+    static function (): void {
+        // `render(view, [])` is the same as `echo view(view, [])`.
         render('index');
     }
 );

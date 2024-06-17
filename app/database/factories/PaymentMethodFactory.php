@@ -6,20 +6,23 @@ use App\Models\PaymentMethod;
 
 class PaymentMethodFactory extends Factory
 {
+    /** @var PaymentMethod $model */
     public $model = PaymentMethod::class;
-    private static $employeeIdCounter = 2;
+
+    /** @var integer $employeeIdCounter */
+    private static int $employeeIdCounter = 2;
 
     public function definition(): array
     {
-        // Get the current value of the counter
+        // Get the current value of the counter.
         $employeeId = self::$employeeIdCounter;
 
-        // Increment the counter and reset if it exceeds 5
-        self::$employeeIdCounter++;
+        // Increment the counter and reset if it exceeds 5.
+        ++self::$employeeIdCounter;
         if (self::$employeeIdCounter > 5) {
             self::$employeeIdCounter = 2;
         }
-        
+
         return [
             'employee_id' => $employeeId,
             'type' => "credit card",

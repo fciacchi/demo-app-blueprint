@@ -9,11 +9,9 @@ class EmployeeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        (new EmployeeFactory)->create(5)->save();
+        (new EmployeeFactory())->create(5)->save();
     }
 }

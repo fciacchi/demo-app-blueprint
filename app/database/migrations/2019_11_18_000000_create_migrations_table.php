@@ -8,17 +8,16 @@ class CreateMigrationsTable extends Database
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         if (!static::$capsule::schema()->hasTable('migrations')) {
-            // Create the migrations table
+            // Create the migrations table.
             static::$capsule::schema()->create(
-                'migrations', function (Blueprint $table) {
-                    $table->increments('id');
-                    $table->string('migration')->unique();
+                'migrations',
+                static function (Blueprint $blueprint): void {
+                    $blueprint->increments('id');
+                    $blueprint->string('migration')->unique();
                 }
             );
 
@@ -28,10 +27,8 @@ class CreateMigrationsTable extends Database
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         (new Migration('2019_11_18_000000_create_migrations_table'))->delete();
 

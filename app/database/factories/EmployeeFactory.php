@@ -6,6 +6,7 @@ use App\Models\Employee;
 
 class EmployeeFactory extends Factory
 {
+    /** @var Employee $model */
     public $model = Employee::class;
 
     public function definition(): array
@@ -19,7 +20,7 @@ class EmployeeFactory extends Factory
             'department' => $this->str::random(10),
             // 'created_at' => tick()->now(),
             // 'updated_at' => tick()->now(),
-            //'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            // 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ];
     }
 }

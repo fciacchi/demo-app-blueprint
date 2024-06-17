@@ -1,10 +1,12 @@
+import React from 'react'
+
 const Hello = ({ auth, welcome }) => {
-    return (
+  return (
         <div>
             <h1>Login</h1>
             <p>{welcome}</p>
         </div>
-    )
+  )
 }
 
-export default Hello;
+export default Hello
