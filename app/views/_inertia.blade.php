@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title inertia>Document</title>
+    <title inertia>Fundraisers Website</title>
     <?php echo \Leaf\Vite::reactRefresh(); ?>
     <?php echo vite(['/js/app.jsx', sprintf('/js/Pages/%s.jsx', $page['component'])]); ?>
     <link rel="stylesheet" href="{{ ViewsPath('css/app.css') }}">

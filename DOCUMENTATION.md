@@ -905,9 +905,24 @@ No payload
 
 </details>
 
-## WIP
+## JSX Template
 
-- Main Template for JSX
+The FE application is a single JSX page that levarage the APIs to build a simple, 
+but effective, way to navigate the Fundraisers, their Missions and Donations.
+The idea is to show a very simple way of browsing and aggregating the data, so that 
+we can see the deadlines, the pledged donations and the different Goals. 
+
+The App is accessible at the URL: http://localhost:5500/
+
+### List of Fundraisers
+![Image n.1](assets/images/image01.png)
+
+### List of Missions
+![Image n.2](assets/images/image02.png)
+
+### List of Donations
+![Image n.3](assets/images/image03.png)
+
 
 ## TODO
 
