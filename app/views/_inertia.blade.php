@@ -1,24 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title inertia>Document</title>
     <?php echo \Leaf\Vite::reactRefresh(); ?>
     <?php echo vite(['/js/app.jsx', sprintf('/js/Pages/%s.jsx', $page['component'])]); ?>
-    <?php
-    if (!isset($__inertiaSsrDispatched)) {
-        $__inertiaSsrDispatched = true;
-        $__inertiaSsrResponse = (new \Leaf\Inertia\Ssr\Gateway())->dispatch($page);
-    }
-
-    if ($__inertiaSsrResponse) {
-        echo $__inertiaSsrResponse->head;
-    }
-    ?>
+    <link rel="stylesheet" href="{{ ViewsPath('css/app.css') }}">
 </head>
-
 <body>
     <?php
     if (!isset($__inertiaSsrDispatched)) {
@@ -33,5 +22,4 @@
     }
     ?>
 </body>
-
 </html>

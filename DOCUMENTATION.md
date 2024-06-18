@@ -907,7 +907,6 @@ No payload
 
 ## WIP
 
-- Add PHPUnit tests
 - Main Template for JSX
 
 ## TODO

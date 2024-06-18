@@ -116,7 +116,7 @@ $ ./run-tests.sh
 ```
 
 <details>
-  <summary>If you want to run linters manually</summary>
+  <summary>If you want to run the tests manually</summary>
 
 ```shell
 $ ./vendor/bin/phpunit

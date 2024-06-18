@@ -2,6 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from '@leafphp/vite-plugin/inertia-helpers'
+import '../css/app.css' // Ensure this path is correct
 
 const appName = import.meta.env.VITE_APP_NAME || 'Leaf PHP'
 
