@@ -16,3 +16,4 @@ yarn-error.log
 phpunit.xml.bak
 tests/coverage/
 tests/logs/
+coverage/
