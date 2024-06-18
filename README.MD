@@ -10,7 +10,46 @@
 
 For this see the [Documentation](./DOCUMENTATION.md)
 
+## Set-up
+
+To run the application locally we assume you have a Linux Debian/Ubuntu
+machine wiht the following:
+
+<details>
+  <summary>PHP 8.2+ (and SQLite support)</summary>
+
+```shell
+# Install PHP and Composer
+$ sudo apt install php8.2 sqlite3 php8.2-sqlite3
+$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+$ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+$ php -r "unlink('composer-setup.php');"
+$ composer update
+```
+</details>
+
+<details>
+  <summary>Node 18.20+ and npm 10.5</summary>
+
+```shell
+# Install Node and npm
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+$ nvm install 18
+$ npm update
+```
+</details><br />
+
+For semplicity you can also run:
+
+```shell
+$ chmod a+x run-*.sh
+$ ./run-setup.sh
+```
+
 ## Installation
+
+If you intend to use SQLite (and your PHP supports it), you can prepare the application by running the 
+following command:
 
 ```shell
 $ chmod a+x run-*.sh
@@ -21,25 +60,25 @@ $ ./run-install.sh
   <summary>If you want to run the installer manually</summary>
 
 ```shell
-# INSTALL COMPOSER
-$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-$ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-$ php -r "unlink('composer-setup.php');"
-$ composer update
-# INSTALL NPM
-$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-$ nvm install 18
-$ npm update
-# SET-UP DATABASE
-$ sudo apt install sqlite3 php8.2-sqlite3
 $ composer global require leafs/cli
+$ cp .env.example .env
 $ touch database/database.sqlite
 $ php leaf db:migrate
 $ php leaf db:seed
-# SET-UP DEFAULT ENV
-$ cp .env.example .env
 ```
-</details>
+</details><br />
+
+If you are not planning on using SQLite, but a hosted MySQL or 
+PosgreSQL DB, you should edit your `.env` file:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+```
 
 ## DEV Environment
 

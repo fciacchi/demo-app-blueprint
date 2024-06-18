@@ -13,6 +13,7 @@ the tight timeline of development, it's a better choice. However
 and Vite for working with JSX pages and Eloquent ORM for the database.
 
 A Live version of the App is accessible at: https://demo.asplanned.app
+
 ## What is being left out
 
 For the purpose of the test, it is being left out:
@@ -20,7 +21,6 @@ For the purpose of the test, it is being left out:
 * User authentication
 * Mailing system
 * Content pages (terms, privacy, etc)
-* Design is based upon template [XXXX]()
 
 ## Database Structure
 
