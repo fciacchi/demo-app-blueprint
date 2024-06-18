@@ -1,95 +1,150 @@
 body {
-    font-family: 'DM Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-    color: #333;
-  }
+  font-family: 'DM Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  color: #333;
+}
 
-  h1, h2, h3 {
-    color: #333;
-    margin: 0.5em 0;
-  }
+h1, h2, h3 {
+  color: #333;
+  margin: 0.5em 0;
+}
 
-  ul {
-    list-style: none;
-    padding: 0;
-  }
+ul {
+  list-style: none;
+  padding: 0;
+}
 
-  li {
-    margin: 10px 0;
-  }
+li {
+  margin: 10px 0;
+}
 
-  a {
-    text-decoration: none;
-    color: #007bff;
-  }
+a {
+  text-decoration: none;
+  color: #007bff;
+}
 
-  a:hover {
-    text-decoration: underline;
-  }
+a:hover {
+  text-decoration: underline;
+}
 
-  /* Container Styles */
+/* Container Styles */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Styles */
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+header a {
+  color: white;
+}
+
+/* Card Styles */
+.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+/* Button Styles */
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    width: 100%;
+    padding: 10px;
   }
 
-  /* Header Styles */
-  header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-  }
-
-  header a {
-    color: white;
-  }
-
-  /* Card Styles */
   .card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 15px;
   }
 
-  .card h2 {
-    margin-top: 0;
-  }
-
-  /* Button Styles */
   button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 8px 16px;
   }
+}
 
-  button:hover {
-    background-color: #0056b3;
-  }
+.container {
+  padding: 20px;
+}
 
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .container {
-      width: 100%;
-      padding: 10px;
-    }
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s;
+}
 
-    .card {
-      padding: 15px;
-    }
+.card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-    button {
-      padding: 8px 16px;
-    }
-  }
-  
+.mission-card, .donation-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.mission-card:hover, .donation-card:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
