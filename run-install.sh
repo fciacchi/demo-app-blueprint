@@ -1,6 +1,6 @@
 #!/bin/sh
 
-composer global require leafs/cli
+sudo composer global require leafs/cli
 cp .env.example .env
 touch database/database.sqlite
 php leaf db:migrate

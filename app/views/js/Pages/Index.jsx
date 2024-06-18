@@ -24,11 +24,7 @@ const Fundraisers = () => {
                   try {
                     const donationsResponse = await axios.get(`/api/fundraisers/${fundraiser.id}/missions/${mission.id}/donations`)
                     if (donationsResponse.data && Array.isArray(donationsResponse.data.donations)) {
-                      mission.donations = await Promise.all(donationsResponse.data.donations.map(async (donation) => {
-                        const donorResponse = await axios.get(`/api/employees/${donation.employee_id}`)
-                        donation.donor = donorResponse.data
-                        return donation
-                      }))
+                      mission.donations = donationsResponse.data.donations
                     } else {
                       mission.donations = []
                     }
@@ -83,18 +79,36 @@ const Fundraisers = () => {
     setFundraisers(updatedFundraisers)
   }
 
-  const toggleDonations = (fundraiserId, missionId) => {
-    const updatedFundraisers = fundraisers.map((fundraiser) => {
-      if (fundraiser.id === fundraiserId) {
-        fundraiser.missions = fundraiser.missions.map((mission) => {
-          if (mission.id === missionId) {
-            mission.showDonations = !mission.showDonations
-          }
-          return mission
-        })
-      }
-      return fundraiser
-    })
+  const toggleDonations = async (fundraiserId, missionId) => {
+    const updatedFundraisers = await Promise.all(
+      fundraisers.map(async (fundraiser) => {
+        if (fundraiser.id === fundraiserId) {
+          fundraiser.missions = await Promise.all(
+            fundraiser.missions.map(async (mission) => {
+              if (mission.id === missionId) {
+                mission.showDonations = !mission.showDonations
+                if (mission.showDonations && !mission.donorsFetched) {
+                  mission.donations = await Promise.all(
+                    mission.donations.map(async (donation) => {
+                      try {
+                        const donorResponse = await axios.get(`/api/employees/${donation.employee_id}`)
+                        donation.donor = donorResponse.data
+                      } catch (donorError) {
+                        donation.donor = { first_name: 'Unknown', last_name: '', email: '' }
+                      }
+                      return donation
+                    })
+                  )
+                  mission.donorsFetched = true
+                }
+              }
+              return mission
+            })
+          )
+        }
+        return fundraiser
+      })
+    )
     setFundraisers(updatedFundraisers)
   }
 
@@ -146,7 +160,7 @@ const Fundraisers = () => {
                               : (
                                   mission.donations.map((donation) => (
                                 <div key={donation.id} className="donation-card">
-                                  <p>Donor: {donation.donor.first_name} {donation.donor.last_name} ({donation.donor.email})</p>
+                                  <p>Donor: {donation.donor ? `${donation.donor.first_name} ${donation.donor.last_name} (${donation.donor.email})` : 'Loading...'}</p>
                                   <p>Amount: {donation.amount} {mission.goal_currency}</p>
                                 </div>
                                   ))

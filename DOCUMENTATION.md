@@ -1,9 +1,8 @@
 # DOCUMENTATION
 
 The following project is a demo application that has:
-* User's management
-* Donation page
-* Admin backoffice
+* Database and full API definition
+* Fundraisers and Donations Single Page Application
 
 The idea is to build the following application using 
 [LeafPHP Framework](https://leafphp.dev/). This Framework has been chosen 
@@ -63,6 +62,8 @@ PHP and JS code. Specifically:
 
 
 ## API Endpoints
+
+A Postman Collection is available in the [Project's Assets](./assets/postman/collection/Demo%20App.postman_collection.json)
 
 ### Employees
 
