@@ -8,6 +8,7 @@ const Fundraisers = () => {
   const [error, setError] = useState(null)
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
+  const [employeeCache, setEmployeeCache] = useState({});
 
   useEffect(() => {
     const fetchFundraisers = async () => {
@@ -90,15 +91,18 @@ const Fundraisers = () => {
                 if (mission.showDonations && !mission.donorsFetched) {
                   mission.donations = await Promise.all(
                     mission.donations.map(async (donation) => {
-                      try {
-                        const donorResponse = await axios.get(`/api/employees/${donation.employee_id}`)
-                        donation.donor = donorResponse.data
-                      } catch (donorError) {
-                        donation.donor = { first_name: 'Unknown', last_name: '', email: '' }
+                      if (!employeeCache[donation.employee_id]) {
+                        try {
+                          const donorResponse = await axios.get(`/api/employees/${donation.employee_id}`);
+                          employeeCache[donation.employee_id] = donorResponse.data;
+                        } catch (donorError) {
+                          employeeCache[donation.employee_id] = { first_name: 'Unknown', last_name: '', email: '' };
+                        }
                       }
-                      return donation
+                      donation.donor = employeeCache[donation.employee_id];
+                      return donation;
                     })
-                  )
+                  );
                   mission.donorsFetched = true
                 }
               }
