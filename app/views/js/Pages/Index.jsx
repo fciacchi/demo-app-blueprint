@@ -8,7 +8,7 @@ const Fundraisers = () => {
   const [error, setError] = useState(null)
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
-  const [employeeCache, setEmployeeCache] = useState({});
+  const [employeeCache, setEmployeeCache] = useState({})
 
   useEffect(() => {
     const fetchFundraisers = async () => {
@@ -89,20 +89,33 @@ const Fundraisers = () => {
               if (mission.id === missionId) {
                 mission.showDonations = !mission.showDonations
                 if (mission.showDonations && !mission.donorsFetched) {
-                  mission.donations = await Promise.all(
-                    mission.donations.map(async (donation) => {
-                      if (!employeeCache[donation.employee_id]) {
-                        try {
-                          const donorResponse = await axios.get(`/api/employees/${donation.employee_id}`);
-                          employeeCache[donation.employee_id] = donorResponse.data;
-                        } catch (donorError) {
-                          employeeCache[donation.employee_id] = { first_name: 'Unknown', last_name: '', email: '' };
-                        }
+                  // Collect unique employee IDs
+                  const uniqueEmployeeIds = [...new Set(mission.donations.map(donation => donation.employee_id))]
+
+                  // Fetch employee data for unique IDs that are not in cache
+                  const employeeFetchPromises = uniqueEmployeeIds
+                    .filter(employeeId => !employeeCache[employeeId])
+                    .map(async employeeId => {
+                      try {
+                        const response = await axios.get(`/api/employees/${employeeId}`)
+                        employeeCache[employeeId] = response.data
+                      } catch (error) {
+                        employeeCache[employeeId] = { first_name: 'Unknown', last_name: '', email: '' }
                       }
-                      donation.donor = employeeCache[donation.employee_id];
-                      return donation;
                     })
-                  );
+
+                  // Wait for all fetches to complete
+                  await Promise.all(employeeFetchPromises)
+
+                  // Update state with the new cache
+                  setEmployeeCache({ ...employeeCache })
+
+                  // Assign donor data from cache to donations
+                  mission.donations = mission.donations.map(donation => {
+                    donation.donor = employeeCache[donation.employee_id]
+                    return donation
+                  })
+
                   mission.donorsFetched = true
                 }
               }

@@ -2,10 +2,17 @@
 
 declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\Arguments\Rector\ClassMethod\ArgumentAdderRector;
+use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
+use Rector\CodeQuality\Rector\Include_\AbsolutizeRequireAndIncludePathRector;
+use Rector\CodeQuality\Rector\Ternary\ArrayKeyExistsTernaryThenValueToCoalescingRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictNativeCallRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictScalarReturnExprRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictTypedPropertyRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictTypedCallRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
@@ -13,7 +20,14 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     // register a single rule
+    $rectorConfig->rule(ArgumentAdderRector::class);
     $rectorConfig->rule(InlineConstructorDefaultToPropertyRector::class);
+    $rectorConfig->rule(AbsolutizeRequireAndIncludePathRector::class);
+    $rectorConfig->rule(ArrayKeyExistsTernaryThenValueToCoalescingRector::class);
+    $rectorConfig->rule(ReturnTypeFromStrictNativeCallRector::class);
+    $rectorConfig->rule(ReturnTypeFromStrictScalarReturnExprRector::class);
+    $rectorConfig->rule(ReturnTypeFromStrictTypedCallRector::class);
+    $rectorConfig->rule(ReturnTypeFromStrictTypedPropertyRector::class);
 
     // define sets of rules
     $rectorConfig->sets([
