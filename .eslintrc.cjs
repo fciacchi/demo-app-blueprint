@@ -19,6 +19,12 @@ module.exports = {
       parserOptions: {
         sourceType: 'script'
       }
+    },
+    {
+      "files": ["app/views/js/Pages/Index.js"],
+      "rules": {
+        "no-unused-vars": "off"
+      }
     }
   ],
   parserOptions: {
